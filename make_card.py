@@ -9,14 +9,19 @@ import os
 import urllib.request
 import urllib.error
 
+# コマンドライン引数が足りなければ終了
+if len(sys.argv) < 2:
+    print("使用法： python make_card.py 参加者データ [大会名] [開催地] [……]")
+    print("例： python make_card.py data.csv 第1回大会")
+    sys.exit()
+
 #Twitterオブジェクトの生成
 auth = tweepy.OAuthHandler(settings.CONSUMER_KEY, settings.CONSUMER_SECRET)
 auth.set_access_token(settings.ACCESS_TOKEN, settings.ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 #TwiiterIDの載ったCSVファイルの読み込み
-print("CSVファイルの名前を入力してください")
-csvfile = input()
+csvfile = sys.argv[1]
 reader_list = []
 id_list = []
 no_id_line = []
@@ -76,11 +81,10 @@ for id in id_list:
 print("アイコン画像の取得完了")
 
 #input.csvを出力
-print("大会名を入力してください")
-tour_name = input()
-reader_list[0].append("大会名")
-for i in range(1, len(reader_list)):
-    reader_list[i].append(tour_name)
+if len(sys.argv) > 2:
+    for i in range(2, len(sys.argv)):
+        for j in range(0, len(reader_list)):
+            reader_list[j].append(sys.argv[i])
 if len(no_id_line) > 0:
     no_id_list.append(reader_list[0])
     for i in no_id_line:
