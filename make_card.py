@@ -52,7 +52,7 @@ for id in id_list:
     print(str(icon_num) + ':' + id)
     user = api.get_user(id)
     url = user.profile_image_url_https.replace("_normal.", ".")
-    other,ext = = os.path.splitext(url)
+    other,ext = os.path.splitext(url)
     if not ext:
         ext = ".jpg"
     path = "./icon/" + str(icon_num) + ext
