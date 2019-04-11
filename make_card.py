@@ -36,7 +36,14 @@ with open(csvfile,'r') as f:
         id_list.append(reader_list[i][id_row])
 
 #アイコン画像を取得しiconディレクトリに格納
-os.mkdir("./icon")
+try:
+    os.mkdir("./icon")
+except FileExistsError as e:
+    print("Error!")
+    print(e)
+    print("ファイル\'icon\'が既に存在します。削除してください。")
+    sys.exit()
+
 print("アイコン画像の取得を開始")
 icon_num = 1
 for id in id_list:
