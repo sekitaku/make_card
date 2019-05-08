@@ -89,6 +89,8 @@ if len(no_id_line) > 0:
     no_id_list.append(reader_list[0])
     for i in no_id_line:
         no_id_list.append(reader_list.pop(i))
+        for j in range(0, len(no_id_line)):
+            no_id_line[j] -= 1;
 with open("./input.csv", 'w') as f:
     writer = csv.writer(f)
     writer.writerows(reader_list)
