@@ -57,6 +57,8 @@ icon_num = 1
 for id in id_list:
     if '@' in id:
         id = id.lstrip('@')
+    if '＠' in id:
+        id = id.lstrip('＠')
     print(str(icon_num) + ':' + id)
     try:
         user = api.get_user(id)
